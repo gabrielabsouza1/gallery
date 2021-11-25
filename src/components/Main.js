@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
+
 const apikey = (process.env.REACT_APP_API_KEY)
 
 
@@ -8,6 +9,19 @@ function Main() {
 
     const [imagens, setImagens] = useState([]);
     const [query, setQuery] = useState('')
+    const [data, setData] = useState([])
+
+    async function viewData() {
+        const resposta = await axios.get(`https://api.pexels.com/v1/curated?page=1&per_page=30`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: apikey,
+                },
+            })
+        dadosApi(resposta)
+    }
 
     async function searchImages() {
         const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30`,
@@ -19,10 +33,11 @@ function Main() {
                 },
             })
         dadosImagens(searchResponse)
+        dadosApi(searchResponse)
     }
 
     async function randomImages() {
-        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=2&per_page=30`,
+        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=1&per_page=30`,
             {
                 method: "GET",
                 headers: {
@@ -32,6 +47,10 @@ function Main() {
             })
         dadosImagens(randomResponse)
     }
+    useEffect(() => {
+        viewData();
+        // eslint-disable-next-line
+       }, [])
 
     useEffect(() => {
         verificaQuery();
@@ -40,6 +59,10 @@ function Main() {
 
     const dadosImagens = (resposta) => {
         setImagens(resposta.data.photos);
+    }
+
+    const dadosApi = (resposta) => {
+        setData(resposta.data);
     }
 
     async function verificaQuery () {
@@ -60,10 +83,11 @@ function Main() {
             placeholder="Search for Images" />
             <button 
             onClick={verificaQuery}
-            className="search_btn">Search</button>
-
+            className="search_btn">Search
+            </button>
+            <p>Foram encontradas {data.total_results} imagens</p>
             <ul className="posicao-imagens">
-                {imagens.map((img) => (
+                    {imagens.map((img) => (
                     <li key={img.id}>
                         <img className="imagens-pagina" src={img.src.large} alt=""></img>
                     </li>
@@ -72,7 +96,7 @@ function Main() {
             <div>
                 <button>Next Page</button>
             </div>
-            <div>{console.log(imagens)}</div>
+            <div>{console.log(data)}</div>
         </section>
 
     )
