@@ -7,9 +7,10 @@ const apikey = (process.env.REACT_APP_API_KEY)
 function Main() {
 
     const [imagens, setImagens] = useState([]);
+    const [query, setQuery] = useState('')
 
-    async function getImages(page_num) {
-        const response = await axios.get(`https://api.pexels.com/v1/curated?page=1&per_page=30`,
+    async function searchImages() {
+        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30`,
             {
                 method: "GET",
                 headers: {
@@ -17,11 +18,23 @@ function Main() {
                     Authorization: apikey,
                 },
             })
-        dadosImagens(response)
+        dadosImagens(searchResponse)
+    }
+
+    async function randomImages() {
+        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=2&per_page=30`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: apikey,
+                },
+            })
+        dadosImagens(randomResponse)
     }
 
     useEffect(() => {
-        getImages(); 
+        verificaQuery();
         // eslint-disable-next-line
        }, [])
 
@@ -29,10 +42,25 @@ function Main() {
         setImagens(resposta.data.photos);
     }
 
+    async function verificaQuery () {
+        if (query ==='') {
+            return randomImages();
+        } else {
+            return searchImages();
+        }
+    }
+
     return (
         <section className="containerMain background">
-            <input type="text" className="input" placeholder="Search for Images" />
-            <button className="search_btn">Search</button>
+            <input 
+            onChange={e => setQuery(e.target.value)}
+            value={query}
+            type="text" 
+            className="input" 
+            placeholder="Search for Images" />
+            <button 
+            onClick={verificaQuery}
+            className="search_btn">Search</button>
 
             <ul className="posicao-imagens">
                 {imagens.map((img) => (
