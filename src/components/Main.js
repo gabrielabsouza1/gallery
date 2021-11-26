@@ -10,9 +10,10 @@ function Main() {
     const [imagens, setImagens] = useState([]);
     const [query, setQuery] = useState('')
     const [data, setData] = useState([])
+    const [page, setPage] = useState(1)
 
     async function viewData() {
-        const resposta = await axios.get(`https://api.pexels.com/v1/curated?page=1&per_page=30`,
+        const resposta = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30`,
             {
                 method: "GET",
                 headers: {
@@ -24,7 +25,7 @@ function Main() {
     }
 
     async function searchImages() {
-        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30`,
+        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}`,
             {
                 method: "GET",
                 headers: {
@@ -37,7 +38,7 @@ function Main() {
     }
 
     async function randomImages() {
-        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=1&per_page=30`,
+        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30`,
             {
                 method: "GET",
                 headers: {
@@ -63,6 +64,13 @@ function Main() {
 
     const dadosApi = (resposta) => {
         setData(resposta.data);
+    }
+
+    async function trocaPagina () {
+        setPage(page + 1);
+        data.page = page;
+        verificaQuery();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     async function verificaQuery () {
@@ -94,9 +102,11 @@ function Main() {
                 ))}
             </ul>
             <div>
-                <button>Next Page</button>
+                <button
+                onClick={trocaPagina}
+                >Next Page</button>
             </div>
-            <div>{console.log(data)}</div>
+            <div>{console.log(imagens)}</div>
         </section>
 
     )
