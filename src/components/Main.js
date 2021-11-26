@@ -82,7 +82,7 @@ function Main() {
     }
 
     return (
-        <section className="containerMain background">
+        <section className="background">
             <input 
             onChange={e => setQuery(e.target.value)}
             value={query}
@@ -97,7 +97,7 @@ function Main() {
             <ul className="posicao-imagens">
                     {imagens.map((img) => (
                     <li key={img.id}>
-                        <img className="imagens-pagina" src={img.src.large} alt=""></img>
+                        <img src={img.src.large} alt=""></img>
                     </li>
                 ))}
             </ul>

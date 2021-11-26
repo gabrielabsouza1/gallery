@@ -5,11 +5,8 @@ $beakpoint-lg: 1200px;
     text-align: center;
 }
 
-.containerMain {
-    width: 100%;
-}
-
 .background {
+    width: 100%;
     background-image: url(../background.png);
     background-size: 100% 700px;
     background-position: top;
@@ -26,13 +23,15 @@ $beakpoint-lg: 1200px;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-}
 
+    img {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+    }
 
-.imagens-pagina {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border: white solid 12px;
-    margin: 10px;
 }
