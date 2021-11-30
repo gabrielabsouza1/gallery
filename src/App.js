@@ -1,13 +1,12 @@
 import Main from './components/Main';
+import Navbar from './components/Navbar'
 import "./style.scss";
 
 function App() {
   return (
     <div className="App">
-      <h1>Gallery</h1>
-      <div>
-            <Main/>
-        </div>
+      <Navbar />
+      <Main />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 
-$beakpoint-lg: 1200px;
+$breakpoint-lg: 1200px;
+$breakpoint-md: 980px;
 
 .App {
     text-align: center;
@@ -13,7 +14,7 @@ $beakpoint-lg: 1200px;
     background-repeat: repeat-y;
     min-height: 1900px;
 
-    @media screen and (min-width: $beakpoint-lg) {
+    @media screen and (min-width: $breakpoint-lg) {
         background-size: 100% 1500px;
       }
 }
@@ -34,4 +35,82 @@ $beakpoint-lg: 1200px;
         border-radius: 10px;
     }
 
+}
+
+.logo {
+    max-height: 13rem;
+    max-width: 14rem;
+    margin-left: 25px;
+
+    @media screen and (min-width: $breakpoint-md) {
+            display: flex;
+            position: absolute;
+            top: 16px;
+            left: 30px;
+      }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    align-items: center;
+    color: white;
+    height: 10rem;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    width: 75%;
+
+    @media screen and (min-width: $breakpoint-md) {
+        display: none;
+
+        .nav-links-mobile {
+            position: absolute;
+            display: block;
+            list-style: none;
+            background-color: white;
+            top: 100px;
+            transition: all 0.5s ease-out;
+            width: 100%;
+        }
+  }
+}
+
+.home a,
+.sobre a,
+.servicos a,
+.pacotes a,
+.localizacao a {
+    text-decoration: none;
+    color: #5c5b5b;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 0 12px;
+    cursor: pointer;
+
+    @media screen and (min-width: $breakpoint-md) {
+        color: #5c5b5b;
+        text-align: center;
+        padding: 32px;
+        width: 100%;
+        transition: all 0.5s ease;
+    }
+}
+
+.mobile-menu-icon {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-md) {
+        display: flex;
+        font-size: 30px;
+        color: #5c5b5b;
+        background-color: white;
+        border: none;
+        outline: none;
+        margin-right: 30px;
+    }
 }

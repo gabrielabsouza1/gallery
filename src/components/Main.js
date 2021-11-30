@@ -25,7 +25,7 @@ function Main() {
     }
 
     async function searchImages() {
-        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}`,
+        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}&locale=pt-BR`,
             {
                 method: "GET",
                 headers: {
@@ -38,7 +38,7 @@ function Main() {
     }
 
     async function randomImages() {
-        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30`,
+        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30&locale=pt-BR`,
             {
                 method: "GET",
                 headers: {
@@ -54,9 +54,9 @@ function Main() {
        }, [])
 
     useEffect(() => {
-        verificaQuery();
+        verificaQuery(page);
         // eslint-disable-next-line
-       }, [])
+       }, [page])
 
     const dadosImagens = (resposta) => {
         setImagens(resposta.data.photos);
@@ -66,10 +66,8 @@ function Main() {
         setData(resposta.data);
     }
 
-    async function trocaPagina () {
+    function trocaPagina () {
         setPage(page + 1);
-        data.page = page;
-        verificaQuery();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -97,7 +95,7 @@ function Main() {
             <ul className="posicao-imagens">
                     {imagens.map((img) => (
                     <li key={img.id}>
-                        <img src={img.src.large} alt=""></img>
+                        <img src={img.src.large} alt="" loading="lazy"></img>
                     </li>
                 ))}
             </ul>
@@ -107,6 +105,7 @@ function Main() {
                 >Next Page</button>
             </div>
             <div>{console.log(imagens)}</div>
+            <div>{console.log(page)}</div>
         </section>
 
     )
