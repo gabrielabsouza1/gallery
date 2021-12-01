@@ -7,7 +7,7 @@ const apikey = (process.env.REACT_APP_API_KEY)
 
 function Main() {
 
-    const [imagens, setImagens] = useState([]);
+    const [images, setImages] = useState([]);
     const [query, setQuery] = useState('')
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
@@ -51,28 +51,28 @@ function Main() {
     useEffect(() => {
         viewData();
         // eslint-disable-next-line
-       }, [])
+    }, [])
 
     useEffect(() => {
         verificaQuery(page);
         // eslint-disable-next-line
-       }, [page])
+    }, [page])
 
     const dadosImagens = (resposta) => {
-        setImagens(resposta.data.photos);
+        setImages(resposta.data.photos);
     }
 
     const dadosApi = (resposta) => {
         setData(resposta.data);
     }
 
-    function trocaPagina () {
+    function trocaPagina() {
         setPage(page + 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async function verificaQuery () {
-        if (query ==='') {
+    async function verificaQuery() {
+        if (query === '') {
             return randomImages();
         } else {
             return searchImages();
@@ -80,32 +80,34 @@ function Main() {
     }
 
     return (
-        <section className="background">
-            <input 
-            onChange={e => setQuery(e.target.value)}
-            value={query}
-            type="text" 
-            className="input" 
-            placeholder="Search for Images" />
-            <button 
-            onClick={verificaQuery}
-            className="search_btn">Search
-            </button>
-            <p>Foram encontradas {data.total_results} imagens</p>
+        <section className="mainContainer">
+            <div className="search">
+                <input
+                    onChange={e => setQuery(e.target.value)}
+                    value={query}
+                    type="text"
+                    className="input"
+                    placeholder="Search for Images" />
+                <button
+                    onClick={verificaQuery}
+                    className="button">
+                    	<i className="fas fa-search"></i>
+                </button>
+            </div>
+            <p className="totalImagens">Foram encontradas {data.total_results} imagens</p>
             <ul className="posicao-imagens">
-                    {imagens.map((img) => (
+                {images.map((img) => (
                     <li key={img.id}>
                         <img src={img.src.large} alt="" loading="lazy"></img>
                     </li>
                 ))}
             </ul>
-            <div>
+            <div className="flex-button">
                 <button
-                onClick={trocaPagina}
-                >Next Page</button>
+                    className="button"
+                    onClick={trocaPagina}
+                >Next Page <i className="fas fa-arrow-right"></i></button>
             </div>
-            <div>{console.log(imagens)}</div>
-            <div>{console.log(page)}</div>
         </section>
 
     )

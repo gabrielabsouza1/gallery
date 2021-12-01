@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 $breakpoint-lg: 1200px;
-$breakpoint-sm: 650px;
+$breakpoint-sm: 850px;
+$cor-primaria: #068f41;
 $cor-secundaria: #5c5b5b;
 $montserrat: Montserrat, sans-serif;
-
 
 
 .App {
     text-align: center;
 }
 
-.background {
+.mainContainer {
     width: 100%;
     background-image: url(../background.png);
     background-size: 100% 700px;
@@ -24,11 +24,53 @@ $montserrat: Montserrat, sans-serif;
       }
 }
 
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    margin: 50px 20px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    font-family: $montserrat;
+
+
+    &:focus {
+        box-shadow: (0, 0, 0, 0.1) 0px 10px 15px;
+        border-color: $cor-secundaria;
+    }
+}
+
+.button {
+    border: none;
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    font-size: 35px;
+
+    &:hover{
+        color: $cor-primaria;
+    }  
+}
+
+.totalImagens {
+    font-family: $montserrat;
+    font-size: 1rem;
+    font-weight: bold;
+    position:absolute;
+    left: 50px;
+    margin-bottom: 20px;
+}
+
 .posicao-imagens {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 50px 0;
 
     img {
         position: relative;
@@ -55,7 +97,9 @@ $montserrat: Montserrat, sans-serif;
     align-items: center;
     color: white;
     height: 10rem;
-    padding: 0 20px;
+    padding: 0 50px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
 }
 
 .nav-links {
@@ -71,13 +115,17 @@ $montserrat: Montserrat, sans-serif;
 }
 
 .nav-links-mobile {
+    font-family: $montserrat;
+    font-size: 1.3rem;
+    line-height: 60px;
+    border: black 1px solid;
     position: absolute;
     display: block;
     list-style: none;
     background-color: white;
     top: 100px;
     transition: all 0.5s ease-out;
-    width: 100%;  
+    width: 90%;  
 }
 
 .home a,
@@ -97,7 +145,7 @@ $montserrat: Montserrat, sans-serif;
     cursor: pointer;
 
     &:hover{
-        color: #068f41;
+        color: $cor-primaria;
     }
     }
 }
@@ -113,5 +161,37 @@ $montserrat: Montserrat, sans-serif;
 
     @media screen and (min-width: $breakpoint-sm) {
         display: none;
+    }
+}
+
+.flex-button button {
+    font-family: $montserrat;
+    width: 250px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.containerFooter {
+    height: 200px;
+    background-color: $cor-primaria;
+    font-family: $montserrat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    a {
+        text-decoration: none;
+        color: white;
+        margin-top: 20px;
+    }
+
+    p {
+        margin: 20px;
+        color: white;
+
+        i {
+            color: red;
+            font-size: 22px;
+        }
     }
 }

@@ -1,3 +1,4 @@
+import Footer from './components/Footer';
 import Main from './components/Main';
 import Navbar from './components/Navbar'
 import "./style.scss";
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Main />
+      <Footer/>
     </div>
   );
 }
