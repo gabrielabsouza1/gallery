@@ -73,7 +73,6 @@ $montserrat: Montserrat, sans-serif;
     margin: 50px 0;
 
     img {
-        position: relative;
         width: 300px;
         height: 300px;
         margin: 10px;
@@ -81,7 +80,30 @@ $montserrat: Montserrat, sans-serif;
         object-position: center;
         border-radius: 10px;
     }
+}
 
+#imagens {
+    position: relative;
+    float: left;
+}
+
+.texto-imagem {
+    display: flex;
+    width:94%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    left: 10px; 
+    bottom: 13px;
+    border-radius: 10px;
+    margin-top: -25%; 
+    color: white;
+
+    .estilo-texto {
+        font-family: $montserrat;
+    }
 }
 
 .logo {
@@ -129,7 +151,8 @@ $montserrat: Montserrat, sans-serif;
 }
 
 .home a,
-.contato a {
+.contato a,
+.favoritos a {
     color: $cor-secundaria;
     text-align: center;
     width: 100%;

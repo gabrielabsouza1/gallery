@@ -8,21 +8,8 @@ const apikey = (process.env.REACT_APP_API_KEY)
 function Main() {
 
     const [images, setImages] = useState([]);
-    const [query, setQuery] = useState('')
-    const [data, setData] = useState([])
-    const [page, setPage] = useState(1)
-
-    async function viewData() {
-        const resposta = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30`,
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: apikey,
-                },
-            })
-        dadosApi(resposta)
-    }
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
 
     async function searchImages() {
         const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}&locale=pt-BR`,
@@ -34,7 +21,6 @@ function Main() {
                 },
             })
         dadosImagens(searchResponse)
-        dadosApi(searchResponse)
     }
 
     async function randomImages() {
@@ -48,10 +34,6 @@ function Main() {
             })
         dadosImagens(randomResponse)
     }
-    useEffect(() => {
-        viewData();
-        // eslint-disable-next-line
-    }, [])
 
     useEffect(() => {
         verificaQuery(page);
@@ -62,13 +44,16 @@ function Main() {
         setImages(resposta.data.photos);
     }
 
-    const dadosApi = (resposta) => {
-        setData(resposta.data);
-    }
-
-    function trocaPagina() {
+    function nextPage() {
         setPage(page + 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function previousPage() {
+        if (page >= 2) {
+            setPage(page + 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     async function verificaQuery() {
@@ -91,23 +76,39 @@ function Main() {
                 <button
                     onClick={verificaQuery}
                     className="button">
-                    	<i className="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                 </button>
             </div>
-            <p className="totalImagens">Foram encontradas {data.total_results} imagens</p>
-            <ul className="posicao-imagens">
+            <div className="posicao-imagens">
                 {images.map((img) => (
-                    <li key={img.id}>
-                        <img src={img.src.large} alt="" loading="lazy"></img>
-                    </li>
+                    <div id="imagens">
+                        <img key={img.id} src={img.src.large} alt="" loading="lazy"></img>
+                        <div className="texto-imagem">
+                            <div className="button">
+                                <i 
+                                onClick={() => {
+                                    img.liked = !img.liked;
+                                    console.log(img.liked)
+                                }}
+                                className="fas fa-heart"></i>
+                            </div>
+                            <div className="estilo-texto">{img.photographer}</div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
             <div className="flex-button">
                 <button
                     className="button"
-                    onClick={trocaPagina}
+                    onClick={previousPage}>
+                    <i className="fas fa-arrow-left"></i> Previous Page
+                </button>
+                <button
+                    className="button"
+                    onClick={nextPage}
                 >Next Page <i className="fas fa-arrow-right"></i></button>
             </div>
+            <div>{console.log(images)}</div>
         </section>
 
     )

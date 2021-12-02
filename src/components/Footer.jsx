@@ -4,7 +4,7 @@ function Footer() {
     return (
         <div className="containerFooter">
             <a href="https://www.pexels.com">Photos provided by Pexels</a>
-            <p>Feito com <i class="fas fa-heart"></i> por Gabriela Souza</p>
+            <p>Feito com <i className="fas fa-heart"></i> por Gabriela Souza</p>
         </div>
     )
 }
