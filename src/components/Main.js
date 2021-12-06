@@ -84,11 +84,10 @@ function Main() {
                     <div id="imagens">
                         <img key={img.id} src={img.src.large} alt="" loading="lazy"></img>
                         <div className="texto-imagem">
-                            <div className="button">
+                            <div className="favorite-button">
                                 <i 
                                 onClick={() => {
-                                    img.liked = !img.liked;
-                                    console.log(img.liked)
+                                    sessionStorage.setItem(img.id, img.src.large)
                                 }}
                                 className="fas fa-heart"></i>
                             </div>

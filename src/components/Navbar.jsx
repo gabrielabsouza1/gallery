@@ -8,18 +8,15 @@ const Navbar = () => {
     return (
         <>
             <nav className="navbar" id="cabecalho" >
-                <a href="#home"><img className="logo" src={logotipo} alt="logotipo album de fotos"></img></a>
+                <a href="/"><img className="logo" src={logotipo} alt="logotipo album de fotos"></img></a>
                 <ul onClick={() => setisMobile(false)}
                 className={isMobile ? "nav-links-mobile" : "nav-links"}
                 >
                     <li className="home">
-                        <a href="#home">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li className="favoritos">
-                        <a href="#favoritos">Favoritos</a>
-                    </li>
-                    <li className="contato">
-                        <a href="#contato">Contato</a>
+                        <a href="/favoritos">Favoritos</a>
                     </li>
                 </ul>
                 <button

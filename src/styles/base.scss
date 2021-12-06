@@ -31,6 +31,7 @@ $montserrat: Montserrat, sans-serif;
 }
 
 .input {
+    width: 600px;
     margin: 50px 20px;
     padding: 10px 30px;
     font-size: 1.2rem;
@@ -54,6 +55,18 @@ $montserrat: Montserrat, sans-serif;
     &:hover{
         color: $cor-primaria;
     }  
+}
+
+.favorite-button {
+    border: none;
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    font-size: 35px;
+
+    &:hover{
+        color: red;
+    } 
 }
 
 .totalImagens {
