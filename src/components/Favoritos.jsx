@@ -14,6 +14,7 @@ const Favoritos = () => {
     }, [sessionStorage])
 
     return (
+        <section className="mainContainer">
             <div className="posicao-imagens">
                 <div>{favoritas.map((fav) => (
                     <div id="imagens">
@@ -34,8 +35,8 @@ const Favoritos = () => {
                         </div>
                     </div>
                 ))}</div>
-                <div>{console.log(favoritas)}</div>
             </div>
+        </section>
     )
 }
 

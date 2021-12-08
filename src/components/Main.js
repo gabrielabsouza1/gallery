@@ -10,6 +10,7 @@ function Main() {
     const [images, setImages] = useState([]);
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
+    const [imagemFavorita, setImagemFavorita] = useState(false);
 
     async function searchImages() {
         const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}&locale=pt-BR`,
@@ -51,7 +52,7 @@ function Main() {
 
     function previousPage() {
         if (page >= 2) {
-            setPage(page + 1);
+            setPage(page - 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
@@ -84,12 +85,18 @@ function Main() {
                     <div id="imagens">
                         <img key={img.id} src={img.src.large} alt="" loading="lazy"></img>
                         <div className="texto-imagem">
-                            <div className="favorite-button">
+                            <div>
                                 <i 
                                 onClick={() => {
-                                    sessionStorage.setItem(img.id, img.src.large)
+                                    sessionStorage.setItem(img.id, img.src.large);
+                                    setImagemFavorita(true);
+                                    verificaQuery();
                                 }}
-                                className="fas fa-heart"></i>
+                                className={
+                                    sessionStorage.hasOwnProperty(img.id) ? 
+                                    "fas fa-heart favorite-button-false" :
+                                    "fas fa-heart favorite-button-true"
+                                    }></i>
                             </div>
                             <div className="estilo-texto">{img.photographer}</div>
                         </div>
@@ -107,7 +114,7 @@ function Main() {
                     onClick={nextPage}
                 >Next Page <i className="fas fa-arrow-right"></i></button>
             </div>
-            <div>{console.log(images)}</div>
+            
         </section>
 
     )
