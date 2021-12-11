@@ -6,31 +6,29 @@ $cor-primaria: #068f41;
 $cor-secundaria: #5c5b5b;
 $montserrat: Montserrat, sans-serif;
 
+@mixin flexbox($justify-content){
+    display: flex;
+    justify-content: $justify-content;
+}
 
 .App {
     text-align: center;
 }
 
 .mainContainer {
-    width: 100%;
-    background-image: url(../background.png);
-    background-size: 100% 700px;
-    background-position: top;
-    background-repeat: repeat-y;
-    min-height: 1900px;
+width: 100%;
+background-image: url(../background.png);
+background-size: 100% 700px;
+background-position: top;
+background-repeat: repeat-y;
+height: auto;
 
-    @media screen and (min-width: $breakpoint-lg) {
-        background-size: 100% 1500px;
-      }
-}
-
-.search {
-    display: flex;
-    justify-content: center;
+    .search {
+    @include flexbox(center);
     align-items: center;
-}
+    }
 
-.input {
+    .input {
     width: 600px;
     margin: 50px 20px;
     padding: 10px 30px;
@@ -39,126 +37,124 @@ $montserrat: Montserrat, sans-serif;
     font-family: $montserrat;
 
 
-    &:focus {
-        box-shadow: (0, 0, 0, 0.1) 0px 10px 15px;
-        border-color: $cor-secundaria;
+        &:focus {
+            box-shadow: (0, 0, 0, 0.1) 0px 10px 15px;
+            border-color: $cor-secundaria;
+        }
     }
-}
 
-.button {
+    .button {
     border: none;
     width: 45px;
     height: 45px;
     background-color: transparent;
     font-size: 35px;
 
-    &:hover{
-        color: $cor-primaria;
-    }  
-}
+        &:hover{
+            color: $cor-primaria;
+        }  
+    }
 
-.favorite-button-true {
-    border: none;
-    width: 45px;
-    height: 45px;
-    background-color: transparent;
-    font-size: 35px;
-
-    &:hover {
-        color: red;  
-    } 
-}
-
-.favorite-button-false {
-    border: none;
-    width: 45px;
-    height: 45px;
-    background-color: transparent;
-    font-size: 35px;
-    color: red;  
-}
-
-.totalImagens {
-    font-family: $montserrat;
-    font-size: 1rem;
-    font-weight: bold;
-    position:absolute;
-    left: 50px;
-    margin-bottom: 20px;
-}
-
-.posicao-imagens {
-    display: flex;
+    .position-images {
+    @include flexbox(center);
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 50px 0;
+    margin-bottom: 50px;
+        
+        #images {
+        position: relative;
+        float: left;
 
-    img {
-        width: 300px;
-        height: 300px;
-        margin: 10px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 10px;
+            img {
+            width: 300px;
+            height: 300px;
+            margin: 10px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+            }
+
+            .text-image {
+            @include flexbox(space-between);
+            width:94%;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            align-items: center;
+            padding: 20px;
+            left: 10px; 
+            bottom: 13px;
+            border-radius: 10px;
+            margin-top: -25%; 
+            color: white;
+            
+                .text-style {
+                    font-family: $montserrat;
+                }
+
+                .favorite-button-true {
+                    border: none;
+                    width: 45px;
+                    height: 45px;
+                    background-color: transparent;
+                    font-size: 35px;
+                    cursor: pointer;
+            
+                    &:hover {
+                        color: red;  
+                    } 
+                }
+            
+                .favorite-button-false {
+                    @extend .favorite-button-true;
+                    color: red;  
+                }
+
+                .trash-button {
+                    font-size: 30px;
+                    cursor: pointer;
+                }
+            }
+        }  
     }
-}
 
-#imagens {
-    position: relative;
-    float: left;
-}
+    .flex-button {
+        @include flexbox(space-around);
+        width: 100%;
 
-.texto-imagem {
-    display: flex;
-    width:94%;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    left: 10px; 
-    bottom: 13px;
-    border-radius: 10px;
-    margin-top: -25%; 
-    color: white;
-
-    .estilo-texto {
+        button {
+        @extend .button;
         font-family: $montserrat;
+        width: 200px;
+        font-size: 20px;
+        margin-bottom: 30px;
+        }
     }
-}
 
-.logo {
-    height: 250px;
-    width: 250px;
-    margin-left: 25px;
+    @media screen and (min-width: $breakpoint-lg) {
+        background-size: 100% 1500px;
+      }
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    align-items: center;
-    color: white;
-    height: 10rem;
-    padding: 0 50px;
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
-}
+@include flexbox(space-between);
+background-color: white;
+align-items: center;
+color: white;
+height: 10rem;
+padding: 0 50px;
+position: relative;
+box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
 
-.nav-links {
-    display: none;
+    img {
+    height: 250px;
+    width: 250px;    
+    }
 
-    @media screen and (min-width: $breakpoint-sm) {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    width: 75%;
-    font-family: $montserrat;
-  }
-}
+    .nav-links {
+    display: none;   
+    }
 
-.nav-links-mobile {
+    .nav-links-mobile {
     font-family: $montserrat;
     font-size: 1.3rem;
     line-height: 60px;
@@ -170,32 +166,17 @@ $montserrat: Montserrat, sans-serif;
     top: 100px;
     transition: all 0.5s ease-out;
     width: 90%;  
-}
+    }
 
-.home a,
-.contato a,
-.favoritos a {
+    a {
     color: $cor-secundaria;
     text-align: center;
     width: 100%;
     transition: all 0.5s ease;
     text-decoration: none;
-
-    @media screen and (min-width: $breakpoint-sm) {
-    text-decoration: none;
-    color: $cor-secundaria;
-    font-size: 20px;
-    padding: 10px 20px;
-    margin: 0 12px;
-    cursor: pointer;
-
-    &:hover{
-        color: $cor-primaria;
     }
-    }
-}
 
-.mobile-menu-icon {
+    .mobile-menu-icon {
     display: flex;
     font-size: 30px;
     color: $cor-secundaria;
@@ -203,26 +184,44 @@ $montserrat: Montserrat, sans-serif;
     border: none;
     outline: none;
     margin-right: 30px;
+    }
 
-    @media screen and (min-width: $breakpoint-sm) {
+
+@media screen and (min-width: $breakpoint-sm) {
+        
+    .nav-links {
+    @include flexbox(flex-end);
+    list-style: none;
+    width: 75%;
+    font-family: $montserrat;
+    }
+
+    a {
+    text-decoration: none;
+    color: $cor-secundaria;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 0 12px;
+    cursor: pointer;
+
+        &:hover{
+        color: $cor-primaria;
+        }
+    }
+
+    .mobile-menu-icon {
         display: none;
     }
 }
-
-.flex-button button {
-    font-family: $montserrat;
-    width: 250px;
-    font-size: 20px;
-    margin-bottom: 30px;
 }
 
 .containerFooter {
     height: 200px;
     background-color: $cor-primaria;
     font-family: $montserrat;
-    display: flex;
+    @include flexbox(center);
     flex-direction: column;
-    justify-content: center;
+    text-align: center;
 
     a {
         text-decoration: none;

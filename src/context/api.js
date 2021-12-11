@@ -7,13 +7,13 @@ const apikey = (process.env.REACT_APP_API_KEY)
 const ApiContext = createContext();
 
 export default function ContextApi({ children }) {
-    const [imagens, setImagens] = useState([]);
+    const [images, setImages] = useState([]);
     const [query, setQuery] = useState('');
-    const [pagina, setPagina] = useState(1);
-    const [imagemFavorita, setImagemFavorita] = useState(false);
+    const [page, setPage] = useState(1);
+    const [favoriteImage, setFavoriteImage] = useState(false);
 
     async function searchImages() {
-        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${pagina}&locale=pt-BR`,
+        const searchResponse = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=30&page=${page}&locale=pt-BR`,
             {
                 method: "GET",
                 headers: {
@@ -21,11 +21,11 @@ export default function ContextApi({ children }) {
                     Authorization: apikey,
                 },
             })
-        dadosImagens(searchResponse)
+        dataImages(searchResponse)
     }
 
     async function randomImages() {
-        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=${pagina}&per_page=30&locale=pt-BR`,
+        const randomResponse = await axios.get(`https://api.pexels.com/v1/curated?page=${page}&per_page=30&locale=pt-BR`,
             {
                 method: "GET",
                 headers: {
@@ -33,26 +33,26 @@ export default function ContextApi({ children }) {
                     Authorization: apikey,
                 },
             })
-        dadosImagens(randomResponse)
+        dataImages(randomResponse)
     }
 
-    const dadosImagens = (resposta) => {
-        setImagens(resposta.data.photos);
+    const dataImages = (response) => {
+        setImages(response.data.photos);
     }
 
-    function proximaPagina() {
-        setPagina(pagina + 1);
+    function nextPage() {
+        setPage(page + 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function paginaAnterior() {
-        if (pagina >= 2) {
-            setPagina(pagina - 1);
+    function previousPage() {
+        if (page >= 2) {
+            setPage(page - 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
-    async function verificaQuery() {
+    async function verifyQuery() {
         if (query === '') {
             return randomImages();
         } else {
@@ -61,24 +61,24 @@ export default function ContextApi({ children }) {
     }
 
     useEffect(() => {
-            verificaQuery(pagina);
+            verifyQuery(page);
             // eslint-disable-next-line
-        }, [pagina])
+        }, [page])
 
     return (
         <ApiContext.Provider
             value={{
-                imagens,
-                setImagens,
+                images,
+                setImages,
                 query,
                 setQuery,
-                pagina,
-                setPagina, 
-                verificaQuery, 
-                proximaPagina, 
-                paginaAnterior, 
-                imagemFavorita, 
-                setImagemFavorita
+                page,
+                setPage, 
+                verifyQuery, 
+                nextPage, 
+                previousPage, 
+                favoriteImage, 
+                setFavoriteImage
             }}
         >
             {children}
@@ -88,29 +88,29 @@ export default function ContextApi({ children }) {
 
 export function useApi() {
     const context = useContext(ApiContext);
-    const { imagens,
-        setImagens,
+    const { images,
+        setImages,
         query,
         setQuery,
-        pagina,
-        setPagina, 
-        verificaQuery, 
-        proximaPagina, 
-        paginaAnterior, 
-        imagemFavorita, 
-        setImagemFavorita }  = context;
+        page,
+        setPage, 
+        verifyQuery, 
+        nextPage, 
+        previousPage, 
+        favoriteImage, 
+        setFavoriteImage }  = context;
     return {
-        imagens,
-        setImagens,
+        images,
+        setImages,
         query,
         setQuery,
-        pagina,
-        setPagina, 
-        verificaQuery, 
-        proximaPagina, 
-        paginaAnterior, 
-        imagemFavorita, 
-        setImagemFavorita
+        page,
+        setPage, 
+        verifyQuery, 
+        nextPage, 
+        previousPage, 
+        favoriteImage, 
+        setFavoriteImage
     };
 }
 

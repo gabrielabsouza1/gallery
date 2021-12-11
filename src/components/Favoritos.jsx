@@ -15,12 +15,12 @@ const Favoritos = () => {
 
     return (
         <section className="mainContainer">
-            <div className="posicao-imagens">
-                <div>{favoritas.map((fav) => (
-                    <div id="imagens">
+            <div className="position-images">
+                {favoritas.map((fav) => (
+                    <div id="images">
                         <img key={fav.id} src={fav} alt="" loading="lazy"></img>
-                        <div className="texto-imagem">
-                            <div className="favorite-button">
+                        <div className="text-image">
+                            <div className="trash-button">
                                 <i
                                     onClick={() => {
                                         let indexFav = favoritas.indexOf(fav);
@@ -34,7 +34,7 @@ const Favoritos = () => {
                             </div>
                         </div>
                     </div>
-                ))}</div>
+                ))}
             </div>
         </section>
     )

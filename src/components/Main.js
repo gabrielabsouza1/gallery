@@ -3,7 +3,7 @@ import { useApi } from '../context/api'
 
 
 function Main() {
-    const { imagens, query, setQuery, proximaPagina, paginaAnterior, verificaQuery, setImagemFavorita } = useApi();
+    const { images, query, setQuery, nextPage, previousPage, verifyQuery, setFavoriteImage } = useApi();
 
     return (
         <section className="mainContainer">
@@ -15,22 +15,22 @@ function Main() {
                     className="input"
                     placeholder="Search for Images" />
                 <button
-                    onClick={verificaQuery}
+                    onClick={verifyQuery}
                     className="button">
                     <i className="fas fa-search"></i>
                 </button>
             </div>
-            <div className="posicao-imagens">
-                {imagens.map((img) => (
-                    <div id="imagens">
+            <div className="position-images">
+                {images.map((img) => (
+                    <div id="images">
                         <img key={img.id} src={img.src.large} alt="" loading="lazy"></img>
-                        <div className="texto-imagem">
+                        <div className="text-image">
                             <div>
                                 <i 
                                 onClick={() => {
                                     sessionStorage.setItem(img.id, img.src.large);
-                                    setImagemFavorita(true);
-                                    verificaQuery();
+                                    setFavoriteImage(true);
+                                    verifyQuery();
                                 }}
                                 className={
                                     sessionStorage.hasOwnProperty(img.id) ? 
@@ -38,23 +38,20 @@ function Main() {
                                     "fas fa-heart favorite-button-true"
                                     }></i>
                             </div>
-                            <div className="estilo-texto">{img.photographer}</div>
+                            <div className="text-style">{img.photographer}</div>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="flex-button">
                 <button
-                    className="button"
-                    onClick={paginaAnterior}>
+                    onClick={previousPage}>
                     <i className="fas fa-arrow-left"></i> Previous Page
                 </button>
                 <button
-                    className="button"
-                    onClick={proximaPagina}
+                    onClick={nextPage}
                 >Next Page <i className="fas fa-arrow-right"></i></button>
-            </div>
-            
+            </div>  
         </section>
 
     )

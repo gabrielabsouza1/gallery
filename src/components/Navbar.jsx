@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logotipo from "../logo.png";
+import logo from "../logo.png";
 
 const Navbar = () => {
 
@@ -7,8 +7,8 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar" id="cabecalho" >
-                <a href="/"><img className="logo" src={logotipo} alt="logotipo album de fotos"></img></a>
+            <nav className="navbar">
+                <a href="/"><img src={logo} alt="logotipo album de fotos"></img></a>
                 <ul onClick={() => setisMobile(false)}
                 className={isMobile ? "nav-links-mobile" : "nav-links"}
                 >
