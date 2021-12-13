@@ -7,7 +7,7 @@ O desafio consiste em driar um álbum de fotos responsivo, com fotos carregadas 
 - No seu terminal, clone o repositório `https://github.com/gabrielabsouza1/gallery.git`;
 - Entre no diretório do projeto com `cd gallery`;
 - Crie sua conta Pexels e resgate sua chave Api;
-- Dentro do deiretório, cria um arquivo `.env` na pasta gallery;
+- Dentro do diretório, crie um arquivo `.env` na pasta gallery;
 - Dentro do arquivo .env escreva: `REACT_APP_API_KEY=ChaveApiPexels`;
 - No terminal digite `npm i`;
 - Após o termino da instalação, rode o projeto no terminal com `npm start`.
