@@ -2,6 +2,8 @@
 
 O desafio consiste em driar um álbum de fotos responsivo, com fotos carregadas pelo Pexels Api.
 
+Link Preview: https://gallery-blue.vercel.app/
+
 ## Visualização
 
 - No seu terminal, clone o repositório `https://github.com/gabrielabsouza1/gallery.git`;
